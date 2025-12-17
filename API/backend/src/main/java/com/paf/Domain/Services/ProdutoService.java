@@ -32,7 +32,7 @@ public class ProdutoService {
 
 
     public ProdutoModel GetByName(String nome) {
-        Optional<ProductEntity> pbn = produtoRepository.findByNome(nome);
+        Optional<ProductEntity> pbn = produtoRepository.findByNomeContainingIgnoreCase(nome);
         if (pbn.isEmpty()) return null;
         // usa o mapper para converter entity -> model
         return ProductMapper.toModel(pbn.get());

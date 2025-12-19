@@ -16,6 +16,8 @@ public interface ProductMapper {
         pe.setNome(model.getNome());
         pe.setDescricao(model.getDescricao());
         pe.setPreco(model.getPreco());
+        pe.setIdPrateleira(model.getIdPrateleira());
+        pe.setIdCorredor(model.getIdCorredor());;
         return pe;
     }
 
@@ -26,6 +28,8 @@ public interface ProductMapper {
         pm.setNome(entity.getNome());
         pm.setDescricao(entity.getDescricao());
         pm.setPreco(entity.getPreco());
+        pm.setIdPrateleira(entity.getIdPrateleira());
+        pm.setIdCorredor(entity.getIdCorredor());
         return pm;
     }
 
@@ -37,6 +41,8 @@ public interface ProductMapper {
         entity.setNome(model.getNome());
         entity.setDescricao(model.getDescricao());
         entity.setPreco(model.getPreco());
+        entity.setIdPrateleira(model.getIdPrateleira());
+        entity.setIdCorredor(model.getIdCorredor());
 
     }
 }

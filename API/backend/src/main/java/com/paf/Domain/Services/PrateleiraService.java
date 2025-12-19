@@ -21,11 +21,6 @@ public class PrateleiraService {
         this.repository = repository;
     }
 
-    /**
-     * MUDANÇA 1: Return Type
-     * Antes retornava String. Agora retorna PrateleirasModel.
-     * Motivo: O Controller precisa do objeto criado (com o ID gerado) para devolver ao React.
-     */
     public PrateleirasModel createPrateleira(PrateleirasModel model) {
         if (model == null) return null;
 
@@ -36,10 +31,7 @@ public class PrateleiraService {
         return PrateleiraMapper.toModel(saved);
     }
 
-    /**
-     * MUDANÇA 2: Método getAll()
-     * Motivo: O Controller chama isto quando o React pede a lista sem filtros.
-     */
+
     public List<PrateleirasModel> getAll() {
         List<PrateleiraEntity> entities = repository.findAll();
         if (entities.isEmpty()) return Collections.emptyList();
@@ -97,7 +89,6 @@ public class PrateleiraService {
                 .collect(Collectors.toList());
     }
 
-    // Método auxiliar ensureCorredorId mantido se o usares noutro lado
     public PrateleirasModel ensureCorredorId(PrateleirasModel prateleira, Long corredorId) {
         if (prateleira != null) {
             prateleira.setCorredorId(corredorId);

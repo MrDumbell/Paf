@@ -12,6 +12,10 @@ public class PrateleiraResponse {
     private Long id;
     private String name;
     private Long corredorId;
+    private Double posX;
+    private Double posY;
+    private Double width;
+    private Double height;
 
     public static PrateleiraResponse fromModel(PrateleirasModel m) {
         if (m == null) return null;
@@ -19,6 +23,12 @@ public class PrateleiraResponse {
         r.setId(m.getId());
         r.setName(m.getName());
         r.setCorredorId(m.getCorredorId());
+        r.setPosX(m.getPosX());
+        r.setPosY(m.getPosY());
+        r.setWidth(m.getWidth());
+        r.setHeight(m.getHeight());
+
+
         return r;
     }
 }

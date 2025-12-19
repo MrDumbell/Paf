@@ -46,6 +46,8 @@ public class ProdutosController {
                     r.setNome(m.getNome());
                     r.setPreco(m.getPreco());
                     r.setDescricao(m.getDescricao());
+                    r.setIdCorredor(m.getIdCorredor());
+                    r.setIdPrateleira(m.getIdPrateleira());
 
                     return r;
                 })
@@ -65,6 +67,8 @@ public class ProdutosController {
         model.setNome(req.getNome());
         model.setDescricao(req.getDescricao());
         model.setPreco(req.getPreco());
+        model.setIdCorredor(req.getIdCorredor());
+        model.setIdPrateleira(req.getIdPrateleira());
 
         // 2. Chamar Service
         // Nota: O teu service deve retornar o Objeto criado (ProdutoModel) e não String
@@ -76,6 +80,8 @@ public class ProdutosController {
         r.setNome(created.getNome());
         r.setPreco(created.getPreco());
         r.setDescricao(created.getDescricao());
+        r.setIdCorredor(created.getIdCorredor());
+        r.setIdPrateleira(created.getIdPrateleira());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(r);
     }
@@ -97,6 +103,9 @@ public class ProdutosController {
         model.setNome(req.getNome());
         model.setDescricao(req.getDescricao());
         model.setPreco(req.getPreco());
+        model.setIdCorredor(req.getIdCorredor());
+        model.setIdPrateleira(req.getIdPrateleira());
+
 
         ProdutoModel updated = produtoService.UpdateProduto(model);
         if (updated == null) return ResponseEntity.notFound().build();
@@ -106,6 +115,8 @@ public class ProdutosController {
         r.setNome(updated.getNome());
         r.setDescricao(updated.getDescricao());
         r.setPreco(updated.getPreco());
+        r.setIdCorredor(updated.getIdCorredor());
+        r.setIdPrateleira(updated.getIdPrateleira());
 
         return ResponseEntity.ok(r);
     }

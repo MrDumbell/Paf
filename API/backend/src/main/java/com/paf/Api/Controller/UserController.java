@@ -10,11 +10,45 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+// 1. Mudei para "/User" (Maiúsculo) para bater certo com o teu api.js
+@RequestMapping("/User")
+// 2. ADICIONADO: Permite conexão do React
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @PostMapping("/Login")
+    public ResponseEntity<?> login(@RequestBody UserRequest request) {
+        System.out.println(">>> Tentativa de Login: " + request.getNome());
+
+        // 1. Busca na BD
+        UserModel user = userService.GetByName(request.getNome());
+
+        // 2. Valida se existe
+        if (user == null) {
+            System.out.println("❌ User não encontrado.");
+            return ResponseEntity.status(401).body("Utilizador não encontrado");
+        }
+
+        // 3. Valida a senha (comparação simples)
+        if (!user.getSenha().equals(request.getSenha())) {
+            System.out.println("❌ Senha errada. Esperada: " + user.getSenha() + " | Recebida: " + request.getSenha());
+            return ResponseEntity.status(401).body("Senha incorreta");
+        }
+
+        // 4. Sucesso
+        System.out.println("✅ Login Sucesso!");
+        UserResponse response = new UserResponse();
+        response.setIdUser(user.getIdUser());
+        response.setNome(user.getNome());
+        response.setEmail(user.getEmail());
+
+        return ResponseEntity.ok(response);
+    }
+
+    // --- MÉTODOS ANTIGOS (Mantidos) ---
 
     @GetMapping("/UserGet")
     public ResponseEntity<UserResponse> GetbyName(@RequestParam String nome) {
@@ -30,7 +64,6 @@ public class UserController {
 
     @PostMapping("/UserPost")
     public ResponseEntity<UserResponse> CreateUser(@RequestBody UserRequest userRequest) {
-        // map DTO -> domain model
         UserModel model = new UserModel();
         model.setNome(userRequest.getNome());
         model.setEmail(userRequest.getEmail());
@@ -38,9 +71,8 @@ public class UserController {
 
         String result = userService.CreateUser(model);
 
-        // prepare response
         UserResponse response = new UserResponse();
-        response.setIdUser(model.getIdUser());
+        response.setIdUser(model.getIdUser()); // Nota: O teu modelo usa setIdUser, mantive assim
         response.setNome(model.getNome());
         response.setEmail(model.getEmail());
         response.setSenha(model.getSenha());
@@ -48,8 +80,8 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @DeleteMapping("/UserDel/{id}")
-    public ResponseEntity<Void> DeleteUser(@PathVariable Long id) {
+    @DeleteMapping("/UserDelete") // Ajustei para bater certo com o padrão comum, ou podes manter UserDel/{id} se o frontend usar assim
+    public ResponseEntity<Void> DeleteUser(@RequestParam Long id) {
         boolean ok = userService.DeleteUser(id);
         if (!ok) return ResponseEntity.notFound().build();
         return ResponseEntity.noContent().build();
@@ -79,6 +111,5 @@ public class UserController {
     public ResponseEntity<Iterable<UserModel>> GetAllUsers() {
         Iterable<UserModel> users = userService.GetAllUsers();
         return ResponseEntity.ok(users);
-
     }
 }

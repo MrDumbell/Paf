@@ -23,5 +23,9 @@ public class ProdutosRequest {
     @NotNull
     private double preco;
 
+    private Long idPrateleira;
+
+    private Long idCorredor;
+
 
 }

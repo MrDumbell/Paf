@@ -58,8 +58,14 @@ public class PrateleiraController {
         PrateleirasModel model = new PrateleirasModel();
         model.setName(req.getName());
         model.setCorredorId(req.getCorredorId());
+        model.setPosX(req.getPosX());
+        model.setPosY(req.getPosY());
+        model.setWidth(req.getWidth());
+        model.setHeight(req.getHeight());
+
 
         // 2. Chamar o Serviço
+        // Nota: O Service precisa de retornar o Model criado, não uma String
         PrateleirasModel created = prateleiraService.createPrateleira(model);
 
         // 3. Converter Model -> Response DTO

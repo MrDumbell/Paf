@@ -13,4 +13,6 @@ private Long id;
 private String nome;
 private String descricao;
 private double preco;
+private Long idCorredor;
+private Long idPrateleira;
 }

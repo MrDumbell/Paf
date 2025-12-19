@@ -22,4 +22,16 @@ public class PrateleiraEntity {
 
     @Column(name = "id_corredor")
     private Long idCorredor;
+
+    @Column(name = "posx")
+    private Double posX;
+
+    @Column(name = "posy")
+    private Double posY;
+
+    @Column(name = "width")
+    private Double width;
+
+    @Column(name = "height")
+    private Double height;
 }

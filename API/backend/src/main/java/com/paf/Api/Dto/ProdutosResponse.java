@@ -23,5 +23,9 @@ private String descricao;
 @NotNull
 private double preco;
 
+private Long idPrateleira;
+
+private Long idCorredor;
+
 
 }

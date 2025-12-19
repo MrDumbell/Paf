@@ -1,24 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* =========================================
+   VARIÁVEIS - TEMA MATTE / SOLID (Flat Design)
+   ========================================= */
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-  --primary: #4f46e5; /* Indigo Moderno */
-  --primary-glow: rgba(79, 70, 229, 0.4);
-  --secondary: #ec4899; /* Pink para destaques */
-  --text-main: #1e293b;
-  --text-light: #64748b;
-  --bg-gradient: radial-gradient(circle at top left, #e0e7ff, #f3e8ff, #ffffff);
+  /* Fundo da Página (Cinza Sólido e Suave - "Slate") */
+  --bg-page: #f8fafc;
+  
+  /* Cores dos Cartões */
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0; /* Borda cinza clara sólida */
+  
+  /* Cores Principais (Sólidas, sem gradiente) */
+  --primary: #2563eb;     /* Azul Real Sólido */
+  --primary-hover: #1d4ed8;
+  --danger: #ef4444;      /* Vermelho Mate */
+  
+  /* Texto */
+  --text-main: #1e293b;   /* Quase preto */
+  --text-secondary: #64748b;
+  
+  /* Sombras (Suaves, para dar profundidade sem brilho) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
 
 body {
-  background-image: var(--bg-gradient);
-  background-attachment: fixed;
+  background-color: var(--bg-page);
   color: var(--text-main);
   min-height: 100vh;
+  /* Removemos a imagem de fundo */
 }
 
 /* --- Layout Principal --- */
@@ -28,14 +42,13 @@ body {
   padding: 0 20px;
 }
 
-/* --- Header Flutuante --- */
+/* --- Header Sólido --- */
 .glass-header {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 20px;
-  border: var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  /* Removemos o efeito de vidro */
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px; /* Cantos menos arredondados */
+  box-shadow: var(--shadow-sm);
   padding: 1.5rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -43,52 +56,68 @@ body {
   margin-bottom: 30px;
 }
 
-.brand h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; background: linear-gradient(90deg, var(--primary), var(--secondary)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.brand h1 { 
+  font-size: 1.5rem; 
+  font-weight: 700; 
+  letter-spacing: -0.5px;
+  color: var(--text-main); /* Cor sólida */
+}
+.brand span {
+  color: var(--primary); /* Destaque sólido */
+}
 
 /* --- Navegação (Tabs) --- */
 .glass-tabs {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   margin-bottom: 30px;
-  background: rgba(255, 255, 255, 0.4);
-  padding: 10px;
-  border-radius: 16px;
-  width: fit-content;
+  border-bottom: 1px solid var(--card-border); /* Linha em baixo em vez de caixa */
+  padding-bottom: 10px;
+  background: transparent;
+  border-radius: 0;
+  width: 100%;
 }
 
 .tab-btn {
   background: transparent;
   border: none;
-  padding: 10px 20px;
-  border-radius: 12px;
-  color: var(--text-light);
-  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
-.tab-btn:hover { color: var(--primary); background: rgba(255,255,255,0.5); }
+.tab-btn:hover { 
+  color: var(--primary); 
+  background: #eff6ff; /* Azul muito claro ao passar o rato */
+}
 
 .tab-btn.active {
-  background: white;
-  color: var(--primary);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  transform: scale(1.05);
+  background: var(--primary);
+  color: white;
+  box-shadow: var(--shadow-sm);
 }
 
 /* --- Cards e Formulários --- */
+/* Mantemos a classe glass-card para não quebrar o React, mas mudamos o estilo */
 .glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  border-radius: 24px;
-  border: var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
   padding: 2rem;
   margin-bottom: 2rem;
-  transition: transform 0.2s;
+  /* Sem blur */
 }
 
-.glass-card:hover { transform: translateY(-2px); }
+.glass-card h3 {
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+}
 
 .floating-form {
   display: grid;
@@ -97,40 +126,45 @@ body {
   align-items: end;
 }
 
+/* INPUTS FOSCOS */
 input, select {
   width: 100%;
   padding: 12px 15px;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  background: #ffffff;
+  color: var(--text-main);
   font-size: 0.95rem;
-  transition: all 0.3s;
+  transition: border-color 0.2s;
+  box-shadow: var(--shadow-sm);
 }
 
 input:focus, select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px var(--primary-glow);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); /* Anel de foco subtil */
 }
 
-/* --- Botões Modernos --- */
+/* --- Botões Sólidos --- */
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary), #6366f1);
+  background: var(--primary);
   color: white;
   border: none;
   padding: 12px 24px;
-  border-radius: 12px;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 15px var(--primary-glow);
-  transition: all 0.3s;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.2s;
 }
 
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--primary-glow); }
+.btn-primary:hover { 
+    background-color: var(--primary-hover);
+    transform: none; /* Removemos o movimento */
+}
 
-.btn-icon { background: none; border: none; cursor: pointer; font-size: 1.2rem; transition: transform 0.2s; }
-.btn-icon:hover { transform: scale(1.2); }
-.btn-icon.delete { color: #ef4444; }
+.btn-icon { background: none; border: none; cursor: pointer; font-size: 1.2rem; opacity: 0.7; transition: opacity 0.2s; }
+.btn-icon:hover { opacity: 1; background: #f1f5f9; border-radius: 6px; }
 
 /* --- Listas --- */
 .list-item {
@@ -138,90 +172,162 @@ input:focus, select:focus {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background: white;
-  border-radius: 16px;
+  background: #f8fafc; /* Fundo cinza muito claro */
+  border-radius: 8px;
   margin-bottom: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-  border: 1px solid rgba(0,0,0,0.03);
+  border: 1px solid var(--card-border);
 }
 
+.list-item strong { color: var(--text-main); }
+
 .tag {
-  background: #f1f5f9;
+  background: #e2e8f0;
   padding: 4px 10px;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 0.8rem;
-  color: var(--text-light);
+  color: var(--text-secondary);
   margin-left: 10px;
+  font-weight: 600;
 }
 
 /* --- Mapa Preview --- */
 .map-preview-container {
   text-align: center;
   position: relative;
-  border-radius: 20px;
+  border-radius: 12px;
   overflow: hidden;
-  border: 2px dashed #cbd5e1;
+  border: 2px dashed var(--card-border);
+  background: #f8fafc;
 }
 
-/* --- LOGIN & REGISTRO (Correção de Estilo) --- */
-.login-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-  background: var(--bg-gradient); /* Garante que o fundo é o mesmo */
-}
-
-.login-glass {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 3rem;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-  animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.login-glass h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, var(--primary), #ec4899);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.login-glass .subtitle {
-  color: var(--text-light);
-  margin-bottom: 2rem;
-}
-
-/* --- TOAST NOTIFICATIONS (Mensagens de Erro/Sucesso) --- */
+/* --- TOAST NOTIFICATIONS --- */
 .notification-toast {
   position: fixed;
   top: 20px;
   right: 20px;
-  padding: 15px 25px;
-  border-radius: 12px;
+  padding: 16px 24px;
+  border-radius: 8px;
   background: white;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  color: var(--text-main);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-lg);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   z-index: 1000;
+  font-weight: 500;
   animation: slideInRight 0.3s ease-out;
-  border-left: 5px solid;
 }
 
-.notification-toast.success { border-left-color: #10b981; }
-.notification-toast.error { border-left-color: #ef4444; }
+.notification-toast.success { border-left: 4px solid #10b981; }
+.notification-toast.error { border-left: 4px solid #ef4444; }
+.notification-toast.info { border-left: 4px solid var(--primary); }
 
 @keyframes slideInRight {
   from { transform: translateX(100%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
+}
+
+/* =========================================
+   LOGIN ESPECÍFICO (CLEAN / SOLID STYLE)
+   ========================================= */
+
+.login-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f5f9; /* Fundo cinza sólido */
+  /* Removemos as bolhas/gradientes */
+}
+
+/* Removemos os pseudo-elementos (bolhas) */
+.login-container::before,
+.login-container::after {
+  display: none;
+}
+
+/* O Cartão de Login */
+.login-box {
+  background: white;
+  border: 1px solid var(--card-border);
+  padding: 40px;
+  border-radius: 16px; /* Cantos menos redondos */
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow-lg); /* Sombra elegante */
+  text-align: center;
+}
+
+/* Logo e Título */
+.logo {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.login-box h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.login-box p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+/* Inputs do Login */
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 6px;
+  display: block;
+  text-align: left;
+}
+
+.login-box input {
+  background-color: #f8fafc;
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  padding: 12px;
+}
+
+.login-box input:focus {
+  background-color: white;
+  border-color: var(--primary);
+}
+
+/* Mensagem de Erro */
+.error-message {
+  font-size: 0.85rem;
+  color: #ef4444;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Rodapé do Formulário */
+.form-footer {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 25px;
+}
+
+.form-footer button {
+  font-weight: 600;
+  color: var(--primary) !important;
+}
+
+.form-footer button:hover {
+  text-decoration: underline !important;
+  color: var(--primary-hover) !important;
 }

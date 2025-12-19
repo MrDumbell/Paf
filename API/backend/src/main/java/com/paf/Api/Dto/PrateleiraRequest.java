@@ -18,5 +18,13 @@ public class PrateleiraRequest {
 
     // id do corredor associado (pode vir no body ou ser definido pelo controller)
     private Long corredorId;
+
+    // Adiciona estes campos:
+    private Double posX;
+    private Double posY;
+    private Double width;
+    private Double height;
+
+// GERA OS GETTERS E SETTERS
 }
 

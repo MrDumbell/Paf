@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 public class ProductEntity {
 
+
     @Id // Marca como chave primária
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Estratégia para ID autoincrementável
     @JoinColumn(name = "id_prod") // O nome da coluna na base de dados
@@ -20,5 +21,9 @@ public class ProductEntity {
     private String descricao;
     @JoinColumn(name = "preco") // Preço do produto, não pode ser nulo
     private double preco;
+    @Column(name = "id_prateleira")
+    private Long idPrateleira;
+    @Column(name = "id_corredor")
+    private Long idCorredor;
 
 }
